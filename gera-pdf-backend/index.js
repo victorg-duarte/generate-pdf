@@ -36,10 +36,18 @@ app.get(`/generate-pdf`, async (req, res) => {
 
         const page = await browser.newPage()
 
+        // 1. Create PDF from URL
         // abre a pagina com endereço selecionado
         await page.goto(url, {
             waitUntil: 'networkidle0' // espera até carrega toda pagina
         })
+
+        // 2. Create PDF from static HTML ou JS
+        // const html = fs.readFileSync("./public/template/layoutPdf.html", "utf8");
+        // await page.setContent( html, {
+        //     waitUntil: 'networkidle0'
+        // })
+
 
         // O pupperteer possui uma funcao chamada pdf, que gera um pdf da pagina
         const pdf = await page.pdf({
